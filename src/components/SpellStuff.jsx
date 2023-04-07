@@ -22,7 +22,8 @@ function SpellSearch() {
         setSearchValue(e.target.value)
     }
 
-    function handleClick(e) {
+    function handleSubmit(e) {
+        e.preventDefault()
         let input = searchValue.toLowerCase().trim()
             .split(' ').join('%20')
         // alert(`Searching for ${input}!`)
@@ -35,7 +36,7 @@ function SpellSearch() {
     }
 
     return (
-        <div className="md:text-left">
+        <form onSubmit={handleSubmit} className="md:text-left">
             <label>
                 <input value={searchValue}
                     onChange={handleSearchValueChange}
@@ -45,11 +46,11 @@ function SpellSearch() {
             </label>
 
             <button
-                onClick={handleClick} className="btn ml-3">Search</button>
+                type='submit' className="btn ml-3">Search</button>
             <SearchResults
                 searchResults={searchResults}
             />
-        </div>
+        </form>
     )
 }
 
