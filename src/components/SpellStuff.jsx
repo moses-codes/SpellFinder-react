@@ -123,7 +123,7 @@ function SpellCard({ spellInfo, handleDeleteSpell }) {
         ritual, school, casting_time } = spellInfo
 
     return (
-        <div className="mx-2 border-2 mb-2 border-black p-3 max-w-4xl shadow-xl dark:bg-gray-900 dark:text-gray-100 rounded-md">
+        <div className="mx-2 border-2 mb-2 border-black p-3 max-w-4xl shadow-xl rounded-md">
 
             <div className="flex flex-col justify-between p-6 space-y-8">
                 <div className="space-y-2">
