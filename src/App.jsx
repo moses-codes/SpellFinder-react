@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import SpellStuff from './components/SpellStuff'
 import TestComponent from './components/TestComponent'
@@ -12,10 +12,10 @@ function App() {
     <div className="App text-center">
       {/* <TestComponent /> */}
       <div>
-
-        <SpellStuff
-        />
-
+        <React.StrictMode>
+          <SpellStuff
+          />
+        </React.StrictMode>
       </div>
     </div>
   )
