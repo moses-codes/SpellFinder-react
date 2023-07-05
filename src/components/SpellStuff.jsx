@@ -26,13 +26,18 @@ function SpellSearch() {
         e.preventDefault()
         let input = searchValue.toLowerCase().trim()
             .split(' ').join('%20')
+
         // alert(`Searching for ${input}!`)
         fetch(`https://api.open5e.com/spells/?search=${input}&limit=5`)
             .then(res => res.json())
             .then(data => {
-                setSearchResults(data.results)
+                let results = data.results.filter(spell => spell.document__slug === "wotc-srd")
+                console.log(results)
+                setSearchResults(results)
             })
             .catch(error => console.log(error))
+
+
     }
 
     return (
@@ -101,17 +106,20 @@ function SearchResults({ searchResults }) {
         setSavedSpells(filteredSpells)
     }
 
+    let spellCards = (savedSpells.map(spell => <SpellCard
+        spellInfo={spell}
+        handleDeleteSpell={() => handleDeleteSpell(spell)}
+        key={spell.name}
+    />))
+
     return (<>
         <section className='sm:flex sm:mt-10 mt-2'>
             <div
                 className="sm:w-1/4 w-3/4 mx-auto"
             >{searchList && searchList}</div>
-            <div className="md:w-3/4"
-            >{savedSpells.map(spell => <SpellCard
-                spellInfo={spell}
-                handleDeleteSpell={() => handleDeleteSpell(spell)}
-                key={spell.name}
-            />)}</div>
+            <div className="md:w-3/4">
+                {spellCards}
+            </div>
         </section>
     </>)
 }
