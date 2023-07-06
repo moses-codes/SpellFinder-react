@@ -26,27 +26,27 @@ export default function SearchSortBar({ setSearchResults, handleSort }) {
 
     }
     return (
-        <div className="flex md:justify-start justify-center">
-            <form onSubmit={handleSubmit} className="md:text-left">
+        <div className="md:flex md:justify-start ">
+            <form onSubmit={handleSubmit} className="md:text-left md:w-full w-52 mx-auto">
                 <label>
                     <input value={searchValue}
                         onChange={handleSearchValueChange}
                         type="text"
                         placeholder="Enter a spell..."
-                        className="input input-bordered md:w-52 w-24 max-w-xs pl-2 ml-2 md:input-md input-sm" />
+                        className="input input-bordered md:w-52 pl-2 ml-2 md:input-md input-xs w-28" />
                 </label>
 
                 <button
-                    type='submit' className="btn md:btn-md btn-sm">Search</button>
+                    type='submit' className="btn md:btn-md btn-xs">Search</button>
 
 
             </form>
             <form
                 onChange={handleSort}
-                className="ml-5">
-                <div className="form-control w-full max-w-xs">
+                className="md:ml-5">
+                <div className="form-control max-w-xs mx-auto">
                     <select
-                        className="select select-bordered select-sm md:select-md"
+                        className="select select-bordered select-xs md:select-md w-48 md:mx-0 mx-auto"
                         defaultValue={"Sort by..."}
                     >
                         <option disabled value={"Sort by..."}>Sort by...</option>
