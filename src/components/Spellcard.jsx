@@ -4,7 +4,7 @@ import { useState } from "react"
 export default function SpellCard({ spellInfo, handleDeleteSpell }) {
     let { desc, name, range, components, concentration,
         duration, higher_level, level, material,
-        ritual, school, casting_time } = spellInfo
+        ritual, school, casting_time, spell_level } = spellInfo
 
     const [show, setShow] = useState(true)
 
@@ -25,7 +25,7 @@ export default function SpellCard({ spellInfo, handleDeleteSpell }) {
                             <button className="btn btn-square"
                                 onClick={handleToggleShow}
                             >
-                                {show ? <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg> : <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>}
+                                {show ? <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg> : <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>}
                             </button>
                             <button onClick={handleDeleteSpell} className="btn btn-outline btn-circle btn-error btn-sm ml-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>

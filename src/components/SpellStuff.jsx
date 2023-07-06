@@ -1,60 +1,98 @@
 import { data } from "autoprefixer"
 import { useState } from "react"
 import SearchResults from "./SearchResults"
+import SearchSortBar from "./SearchSortBar"
+import SpellCard from "./Spellcard"
 
 export default function SpellList(props) {
 
+    const [searchResults, setSearchResults] = useState([])
+    const [savedSpells, setSavedSpells] = useState([])
+
+    console.log(savedSpells)
+
+    function handleSort(e) {
+        if (e.target.value === 'lvl') {
+            console.log('sort by level')
+            setSavedSpells([...savedSpells].sort((a, b) => a.spell_level - b.spell_level))
+        } else if (e.target.value === 'alpha') {
+            console.log('sort alphabetically')
+            setSavedSpells([...savedSpells].sort((a, b) => a.name.localeCompare(b.name)))
+        }
+    }
+
+    function handleDeleteSpell(spell) {
+
+        let filteredSpells = savedSpells.filter(saved => saved.name != spell.name)
+        setSavedSpells(filteredSpells)
+    }
+
     return (
         <>
-            <h1 className="text-5xl mb-5 text-center md:text-left"> <img className='h-20 inline' src='/spellfinderLogo.png' /> Spellfinder </h1>
-            <SpellSearch className="mx-0" />
+
+            <SearchSortBar
+                setSearchResults={setSearchResults}
+                handleSort={handleSort}
+            />
+            <main className='md:flex sm:mt-10 mt-2'>
+                <div
+                    className="md:w-1/4 w-3/4 mx-auto"
+                ><SearchResults
+                        searchResults={searchResults}
+                        setSavedSpells={setSavedSpells}
+                        savedSpells={savedSpells}
+                        className="mx-0" />
+                </div>
+                <div
+                    className="md:w-3/4"
+                >
+                    <div>
+                        {savedSpells.map(spell => <SpellCard
+                            spellInfo={spell}
+                            handleDeleteSpell={() => handleDeleteSpell(spell)}
+                            key={spell.name}
+                        />)}
+                    </div>
+                </div>
+            </main>
         </>
     )
 }
 
-function SpellSearch() {
+// function SpellSearch() {
 
-    const [searchValue, setSearchValue] = useState('')
-    const [searchResults, setSearchResults] = useState([])
-
-
-    function handleSearchValueChange(e) {
-        setSearchValue(e.target.value)
-    }
-
-    function handleSubmit(e) {
-        e.preventDefault()
-        let input = searchValue.toLowerCase().trim()
-            .split(' ').join('%20')
-
-        // alert(`Searching for ${input}!`)
-        fetch(`https://api.open5e.com/spells/?search=${input}&limit=5`)
-            .then(res => res.json())
-            .then(data => {
-                let results = data.results.filter(spell => spell.document__slug === "wotc-srd")
-                console.log(results)
-                setSearchResults(results)
-            })
-            .catch(error => console.log(error))
+//     const [searchValue, setSearchValue] = useState('')
+//     const [searchResults, setSearchResults] = useState([])
+//     const [savedSpells, setSavedSpells] = useState([])
 
 
-    }
+//     function handleSearchValueChange(e) {
+//         setSearchValue(e.target.value)
+//     }
 
-    return (
-        <form onSubmit={handleSubmit} className="md:text-left">
-            <label>
-                <input value={searchValue}
-                    onChange={handleSearchValueChange}
-                    type="text"
-                    placeholder="Enter a spell..."
-                    className="input input-bordered w-50 max-w-xs pl-2 ml-2" />
-            </label>
+//     function handleSubmit(e) {
+//         e.preventDefault()
+//         let input = searchValue.toLowerCase().trim()
+//             .split(' ').join('%20')
 
-            <button
-                type='submit' className="btn ml-3">Search</button>
-            <SearchResults
-                searchResults={searchResults}
-            />
-        </form>
-    )
-}
+//         // alert(`Searching for ${input}!`)
+//         fetch(`https://api.open5e.com/spells/?search=${input}&limit=5`)
+//             .then(res => res.json())
+//             .then(data => {
+//                 let results = data.results.filter(spell => spell.document__slug === "wotc-srd")
+//                 console.log(results)
+//                 setSearchResults(results)
+//             })
+//             .catch(error => console.log(error))
+
+
+//     }
+
+//     return (
+//         <div>
+//             <SearchResults
+//                 searchResults={searchResults}
+//             />
+//         </div>
+//     )
+// }
