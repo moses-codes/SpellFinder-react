@@ -17,6 +17,8 @@ function App() {
         />
 
       </div>
+
+      {/* <p className='animate-bounce'>thing</p> */}
     </div>
   )
 }

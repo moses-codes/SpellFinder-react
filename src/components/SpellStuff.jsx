@@ -9,7 +9,7 @@ export default function SpellList(props) {
     const [searchResults, setSearchResults] = useState([])
     const [savedSpells, setSavedSpells] = useState([])
 
-    console.log(savedSpells)
+    // console.log(savedSpells)
 
     function handleSort(e) {
         if (e.target.value === 'lvl') {
@@ -22,7 +22,6 @@ export default function SpellList(props) {
     }
 
     function handleDeleteSpell(spell) {
-
         let filteredSpells = savedSpells.filter(saved => saved.name != spell.name)
         setSavedSpells(filteredSpells)
     }

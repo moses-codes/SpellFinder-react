@@ -5,9 +5,6 @@ import SpellCard from "./Spellcard";
 //SEARCH RESULTS, SAVED SPELLS.
 
 export default function SearchResults({ searchResults, setSavedSpells, savedSpells }) {
-
-
-
     // const [savedSpells, setSavedSpells] = useState([]);
 
     let searchList = (

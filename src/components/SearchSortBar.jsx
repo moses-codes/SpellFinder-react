@@ -9,13 +9,13 @@ export default function SearchSortBar({ setSearchResults, handleSort }) {
         setSearchValue(e.target.value)
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
         let input = searchValue.toLowerCase().trim()
             .split(' ').join('%20')
 
         // alert(`Searching for ${input}!`)
-        fetch(`https://api.open5e.com/spells/?search=${input}&limit=5`)
+        await fetch(`https://api.open5e.com/spells/?search=${input}&document__slug=wotc-srd`)
             .then(res => res.json())
             .then(data => {
                 let results = data.results.filter(spell => spell.document__slug === "wotc-srd")
